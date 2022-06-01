@@ -24,7 +24,7 @@ def createSensor():
 
     SENSOR_NUMBER = int(os.environ['SENSOR_NUMBER'])
     filename = "sensors.json"
-    mybucket = 'myjsonbucketest
+    mybucket = "myjsonbucketest"
     
     sensor_name = ["p","t"]
     area = ["industrial", "residential"]
