@@ -39,7 +39,7 @@ def createSensor():
     customer = ["AB-Service", "Atlanta Group"]
     device_info = []
     
-    f = open('/tmp/sensor.json','a')
+    f = open('/tmp/sensors.json','a')
     f.write(str(SENSOR_NUMBER)+'\n'+str(ACTIVE_SENSOR_NUMBER)+'\n')
     
     for i in pool_of_sensor:
@@ -48,7 +48,7 @@ def createSensor():
         
         f.write(json.dumps(d.__dict__)+'\n')
         
-        client.upload_file('/tmp/sensor.json', 'myjsonbucketest', '/json/sensor.json')
+        client.upload_file('/tmp/sensors.json', 'myjsonbucketest', '/json/sensors.json')
     f.close()
     
 def lambda_handler(event, context):
