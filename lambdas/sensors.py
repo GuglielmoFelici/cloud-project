@@ -8,7 +8,7 @@ s3 = boto3.client('s3')
 client = boto3.client("s3")
 
 FILENAME_PREFIX = 'measurament'
-BUCKET = 'test-guglielmo-1'
+BUCKET = 'myjsonbucketest'
 SENSORS_DATA_KEY = 'json/sensors.json'
 
 
@@ -35,7 +35,8 @@ def lambda_handler(event, context):
 
     ''' write output on S3 '''
     dirname = today.strftime("%b-%d-%Y")
-    filename = f'{FILENAME_PREFIX}-{str(time())}-{device_id}'
+    extension = '.json'
+    filename = f'{FILENAME_PREFIX}-{str(time())}-{device_id}{extension}'
     with open(f'/tmp/{filename}', 'a') as f:
         f.write(json.dumps(data))
     client.upload_file(f'/tmp/{filename}',
