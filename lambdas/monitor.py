@@ -27,27 +27,24 @@ def createSensor():
     mybucket = 'myjsonbucketest
     
     sensor_name = ["p","t"]
-    pool_of_sensor = []
-    i = 0
-    
-    while i < SENSOR_NUMBER:
-        pool_of_sensor.append(random.choice(sensor_name) + "-" + "".join(random.choice(printable[0:9]) for i in range(8)))
-        i += 1
-    
     area = ["industrial", "residential"]
     customer = ["AB-Service", "Atlanta Group"]
     device_info = []
     
+    i = 0
     f = open(f'/tmp/{filename}','a')
     
-    for i in pool_of_sensor:
-        d = DeviceInfo(i, random.randint(0,10), 'pollution' if i[0:1] == "p" else 'temperature', random.choice(area), random.choice(customer))
-        device_info.append(d)
+    while i < SENSOR_NUMBER:
+       id = random.choice(sensor_name) + "-" + "".join(random.choice(printable[0:9]) for j in range(8))
+       d = DeviceInfo(id, random.randint(0,10), 'pollution' if i[0:1] == "p" else 'temperature', random.choice(area), random.choice(customer))
+       device_info.append(d)
         
-        f.write(json.dumps(d.__dict__)+'\n')
+       f.write(json.dumps(d.__dict__)+'\n')
         
-        client.upload_file(f'/tmp/{filename}', mybucket, f'json/{filename}')
-    f.close()
+       client.upload_file(f'/tmp/{filename}', mybucket, f'json/{filename}')
+       i += 1
+     
+    f.close()     
     
 def lambda_handler(event, context):
     createSensor()
