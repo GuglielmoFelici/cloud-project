@@ -23,9 +23,8 @@ class DeviceInfo:
 def createSensor():
 
     SENSOR_NUMBER = int(os.environ['SENSOR_NUMBER'])
-    ACTIVE_SENSOR_NUMBER = int(os.environ['ACTIVE_SENSOR_NUMBER'])
-    
-    assert(ACTIVE_SENSOR_NUMBER <= SENSOR_NUMBER)
+    filename = "sensors.json"
+    mybucket = 'myjsonbucketest
     
     sensor_name = ["p","t"]
     pool_of_sensor = []
@@ -39,8 +38,7 @@ def createSensor():
     customer = ["AB-Service", "Atlanta Group"]
     device_info = []
     
-    f = open('/tmp/sensors.json','a')
-    f.write(str(SENSOR_NUMBER)+'\n'+str(ACTIVE_SENSOR_NUMBER)+'\n')
+    f = open(f'/tmp/{filename}','a')
     
     for i in pool_of_sensor:
         d = DeviceInfo(i, random.randint(0,10), 'pollution' if i[0:1] == "p" else 'temperature', random.choice(area), random.choice(customer))
@@ -48,7 +46,7 @@ def createSensor():
         
         f.write(json.dumps(d.__dict__)+'\n')
         
-        client.upload_file('/tmp/sensors.json', 'myjsonbucketest', '/json/sensors.json')
+        client.upload_file(f'/tmp/{filename}', mybucket, f'json/{filename}')
     f.close()
     
 def lambda_handler(event, context):
