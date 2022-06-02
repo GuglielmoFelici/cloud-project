@@ -14,6 +14,7 @@ def stream():
     """
     # with SparkSession.builder.appName("Stream data").getOrCreate() as spark:
     sc = SparkContext("local[2]", "NetworkWordCount")
+    '''
     ssc = StreamingContext(sc, 4)
     # csvDF = ssc.textFileStream("s3://data-lake-test-guglielmo")
     csvDF = ssc.textFileStream(
@@ -21,6 +22,13 @@ def stream():
     csvDF.pprint()
     ssc.start()             # Start the computation
     ssc.awaitTermination()  # Wait for the computation to terminate
+    '''
+    ssc = StreamingContext(sc, 1)
+    lines = ssc.textFileStream(
+        "s3://test-guglielmo-1/*")
+    lines.pprint()
+    ssc.start()
+    ssc.awaitTermination()
 
 
 if __name__ == "__main__":
