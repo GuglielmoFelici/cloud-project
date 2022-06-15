@@ -8,18 +8,18 @@ s3 = boto3.client('s3')
 client = boto3.client("s3")
 
 FILENAME_PREFIX = 'measurament'
-BUCKET = 'myjsonbucketest'
-SENSORS_DATA_KEY = 'json/sensors.json'
+BUCKET = 'guglielmo-data-lake'
+SENSORS_DATA_KEY = 'monitor/sensors.json'
 
 
 def lambda_handler(event, context):
 
     today = date.today()
     response = s3.get_object(Bucket=BUCKET, Key=SENSORS_DATA_KEY)['Body']
+    sensors = json.load(response)
 
     ''' choose random device '''
-    sensors = list(response.iter_lines())
-    device = json.loads(random.choice(sensors))
+    device = random.choice(sensors)
     device_id = device['device_id']
 
     ''' generate random data according to device type '''
@@ -40,9 +40,8 @@ def lambda_handler(event, context):
     with open(f'/tmp/{filename}', 'a') as f:
         f.write(json.dumps(data))
     client.upload_file(f'/tmp/{filename}',
-                       'myjsonbucketest', f'json/{dirname}/{filename}')
+                       BUCKET, f'measurements/{dirname}/{filename}')
 
     return {
-        'statusCode': 200,
-        'body': json.dumps(data)
+        'statusCode': 200
     }
