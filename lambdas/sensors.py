@@ -28,17 +28,17 @@ def lambda_handler(event, context):
         "timestamp": time(),
     }
     if device["type"] == "temperature":
-        data["humidity"] = random.randint(0, 100),
-        data["temperature"] = random.randint(-5, 35),
+        data["humidity"] = random.randint(0, 100)
+        data["temperature"] = random.randint(-5, 35)
     elif device["type"] == "pollution":
-        data["CO2_level"] = random.randint(300, 450),  # ppm
+        data["CO2_level"] = random.randint(300, 450)  # ppm
 
     ''' write output on S3 '''
     dirname = today.strftime("%b-%d-%Y")
     extension = '.json'
     filename = f'{FILENAME_PREFIX}-{str(time())}-{device_id}{extension}'
     with open(f'/tmp/{filename}', 'a') as f:
-        f.write(json.dumps(data))
+        json.dump(data, f)
     client.upload_file(f'/tmp/{filename}',
                        BUCKET, f'measurements/{dirname}/{filename}')
 
