@@ -1,5 +1,5 @@
 from time import time
-from datetime import date
+import datetime
 import json
 import random
 import boto3
@@ -14,7 +14,6 @@ SENSORS_DATA_KEY = 'monitor/sensors.json'
 
 def lambda_handler(event, context):
 
-    today = date.today()
     response = s3.get_object(Bucket=BUCKET, Key=SENSORS_DATA_KEY)['Body']
     sensors = json.load(response)
 
@@ -23,9 +22,11 @@ def lambda_handler(event, context):
     device_id = device['device_id']
 
     ''' generate random data according to device type '''
+    today = datetime.date.today().isoformat()
+    now = datetime.datetime.now().isoformat()
     data = {
         "device_id": device_id,
-        "timestamp": time(),
+        "timestamp": now,
     }
     if device["type"] == "temperature":
         data["humidity"] = random.randint(0, 100)
@@ -34,13 +35,11 @@ def lambda_handler(event, context):
         data["CO2_level"] = random.randint(300, 450)  # ppm
 
     ''' write output on S3 '''
-    dirname = today.strftime("%b-%d-%Y")
-    extension = '.json'
-    filename = f'{FILENAME_PREFIX}-{str(time())}-{device_id}{extension}'
-    with open(f'/tmp/{filename}', 'a') as f:
+    filename = f'{device_id}_{now}.json'
+    with open(f'/tmp/{filename}', 'w') as f:
         json.dump(data, f)
     client.upload_file(f'/tmp/{filename}',
-                       BUCKET, f'measurements/{dirname}/{filename}')
+                       BUCKET, f'measurements/{today}/{filename}')
 
     return {
         'statusCode': 200
