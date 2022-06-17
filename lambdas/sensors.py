@@ -1,4 +1,3 @@
-from time import time
 import datetime
 import json
 import random
@@ -22,7 +21,6 @@ def lambda_handler(event, context):
     device_id = device['device_id']
 
     ''' generate random data according to device type '''
-    today = datetime.date.today().isoformat()
     now = datetime.datetime.now().isoformat()
     data = {
         "device_id": device_id,
@@ -39,7 +37,7 @@ def lambda_handler(event, context):
     with open(f'/tmp/{filename}', 'w') as f:
         json.dump(data, f)
     client.upload_file(f'/tmp/{filename}',
-                       BUCKET, f'measurements/{today}/{filename}')
+                       BUCKET, f'measurements/{device["type"]}/{filename}')
 
     return {
         'statusCode': 200
