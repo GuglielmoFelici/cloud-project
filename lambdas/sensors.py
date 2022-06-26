@@ -8,7 +8,7 @@ client = boto3.client("s3")
 
 FILENAME_PREFIX = 'measurament'
 BUCKET = 'guglielmo-data-lake'
-SENSORS_DATA_KEY = 'monitor/sensors.json'
+SENSORS_DATA_KEY = 'all_sensors.json'
 
 
 def lambda_handler(event, context):
@@ -25,6 +25,7 @@ def lambda_handler(event, context):
     data = {
         "device_id": device_id,
         "timestamp": now,
+        "arrived": now + datetime.timedelta(days=random.randint(0, 1))
     }
     if device["type"] == "temperature":
         data["humidity"] = random.randint(0, 100)

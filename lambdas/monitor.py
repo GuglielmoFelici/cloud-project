@@ -10,27 +10,24 @@ client = boto3.client("s3")
 
 FILENAME = "sensors.json"
 BUCKET = "guglielmo-data-lake"
+SENSORS_DATA_KEY = 'all_sensors.json'
 
-SENSORS_NUMBER = 30  # can also use: int(os.environ['SENSORS_NUMBER'])
 
-sensor_name = ["p", "t"]
 area = ["industrial", "residential"]
 customer = ["AB-Service", "Atlanta Group"]
 
 
 def lambda_handler(event, context):
+
+    response = s3.get_object(Bucket=BUCKET, Key=SENSORS_DATA_KEY)['Body']
+    sensors = json.load(response)
+
     device_info = []
-    for _ in range(SENSORS_NUMBER):
-        id = random.choice(
-            sensor_name) + "-" + "".join(random.choice(printable[0:9]) for j in range(8))
-        device_info.append(
-            {
-                "device_id": id,
-                "device_health": random.randint(0, 10),
-                "type": 'pollution' if id[0:1] == "p" else 'temperature',
-                "area": random.choice(area),
-                "customer": random.choice(customer)
-            })
+    for sensor in sensors:
+        sensor['device_health'] = random.randint(0, 10)
+        sensor['area'] = random.choice(area)
+        sensor['customer'] = random.choice(customer)
+        device_info.append(sensor)
     with open(f'/tmp/{FILENAME}', 'w') as f:
         json.dump(device_info, f)
     client.upload_file(f'/tmp/{FILENAME}', BUCKET, f'monitor/{FILENAME}')
