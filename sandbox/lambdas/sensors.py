@@ -7,7 +7,7 @@ s3 = boto3.client('s3')
 client = boto3.client("s3")
 
 FILENAME_PREFIX = 'measurament'
-BUCKET = 'SANDBOX-guglielmo-data-lake'
+BUCKET = 'sandbox-guglielmo-data-lake'
 SENSORS_DATA_KEY = 'monitor/sensors.json'
 
 

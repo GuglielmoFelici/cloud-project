@@ -9,7 +9,7 @@ s3 = boto3.client('s3')
 client = boto3.client("s3")
 
 FILENAME = "sensors.json"
-BUCKET = "SANDBOX-guglielmo-data-lake"
+BUCKET = "sandbox-guglielmo-data-lake"
 
 SENSORS_NUMBER = 30  # can also use: int(os.environ['SENSORS_NUMBER'])
 
