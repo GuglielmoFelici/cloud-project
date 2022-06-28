@@ -21,11 +21,11 @@ def lambda_handler(event, context):
     device_id = device['device_id']
 
     ''' generate random data according to device type '''
-    now = datetime.datetime.now().isoformat()
+    now = datetime.datetime.now()
     data = {
         "device_id": device_id,
-        "timestamp": now,
-        "arrived": now + datetime.timedelta(days=random.randint(0, 1))
+        "timestamp": now.isoformat(),
+        "arrived": (now + datetime.timedelta(days=random.randint(0, 1))).isoformat()
     }
     if device["type"] == "temperature":
         data["humidity"] = random.randint(0, 100)
