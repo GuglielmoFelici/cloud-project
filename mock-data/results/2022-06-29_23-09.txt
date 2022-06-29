@@ -1,0 +1,11 @@
+{'device_id': '11', 'measured': '2022-06-08 00:00:00', 'arrived': '2022-06-08 00:00:00', 'CO2_level': 32, 'device_health': 10, 'type': 'pollution', 'area': 'Rome', 'customer': 'Atlanta Group'}
+{'device_id': '12', 'measured': '2022-06-10 00:00:00', 'arrived': '2022-06-10 00:00:00', 'CO2_level': 22, 'device_health': 4, 'type': 'pollution', 'area': 'Milan', 'customer': 'Atlanta Group'}
+{'device_id': '10', 'measured': '2022-06-11 00:00:00', 'arrived': '2022-06-11 00:00:00', 'CO2_level': 30, 'device_health': 9, 'type': 'pollution', 'area': 'Rome', 'customer': 'Atlanta Group'}
+{'device_id': '13', 'measured': '2022-06-09 00:00:00', 'arrived': '2022-06-09 00:00:00', 'CO2_level': 25, 'device_health': 5, 'type': 'temperature', 'area': 'Milan', 'customer': 'Atlanta Group'}
+{'device_id': '14', 'measured': '2022-06-05 00:00:00', 'arrived': '2022-06-05 00:00:00', 'CO2_level': 27, 'device_health': 3, 'type': 'temperature', 'area': 'Milan', 'customer': 'AB-Service'}
+{'device_id': '5', 'measured': '2022-06-16 00:00:00', 'arrived': '2022-06-16 00:00:00', 'humidity': 16, 'temperature': 16, 'device_health': 8, 'type': 'temperature', 'area': 'Milan', 'customer': 'Atlanta Group'}
+{'device_id': '6', 'measured': '2022-07-01 00:00:00', 'arrived': '2022-07-01 00:00:00', 'humidity': 26, 'temperature': 36, 'device_health': 8, 'type': 'temperature', 'area': 'Milan', 'customer': 'AB-Service'}
+{'device_id': '3', 'measured': '2022-06-17 00:00:00', 'arrived': '2022-06-18 00:00:00', 'humidity': 30, 'temperature': 26, 'device_health': 10, 'type': 'temperature', 'area': 'Rome', 'customer': 'Atlanta Group'}
+{'device_id': '4', 'measured': '2022-06-15 00:00:00', 'arrived': '2022-06-15 00:00:00', 'humidity': 30, 'temperature': 25, 'device_health': 7, 'type': 'temperature', 'area': 'Milan', 'customer': 'Atlanta Group'}
+{'device_id': '2', 'measured': '2022-06-17 00:00:00', 'arrived': '2022-06-17 00:00:00', 'humidity': 40, 'temperature': 21, 'device_health': 3, 'type': 'temperature', 'area': 'Rome', 'customer': 'AB-Service'}
+{'device_id': '1', 'measured': '2022-06-01 00:00:00', 'arrived': '2022-06-01 00:00:00', 'humidity': 6, 'temperature': 6, 'device_health': 6, 'type': 'temperature', 'area': 'Rome', 'customer': 'AB-Service'}
