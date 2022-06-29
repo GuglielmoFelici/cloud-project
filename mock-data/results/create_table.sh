@@ -1,4 +1,4 @@
-TABLE_NAME="measurements6"
+TABLE_NAME="measurements"
 read -p "Do you want to create the table? [y/n] " create
 if [[ $create == 'y' ]]; then
     aws dynamodb create-table \

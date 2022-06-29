@@ -1,4 +1,4 @@
-TABLE_NAME="measurements6"
+TABLE_NAME="measurements"
 file="results.txt"
 while read line; do
     aws dynamodb put-item \
